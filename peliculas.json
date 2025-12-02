@@ -1,0 +1,128 @@
+[
+    {
+        "ID": 1,
+        "Título": "Gladiator",
+        "Año": 2000,
+        "Director": "Ridley Scott",
+        "Sinopsis": "Un general romano traicionado cae en la esclavitud y se convierte en gladiador, buscando venganza por la muerte de su familia.",
+        "Imagen": "gladiator.jpg",
+        "Trailer": "https://www.youtube.com/embed/P5ieIbInFpg"
+    },
+    {
+        "ID": 2,
+        "Título": "Interstellar",
+        "Año": 2014,
+        "Director": "Christopher Nolan",
+        "Sinopsis": "Un grupo de astronautas viaja a través de un agujero de gusano en busca de un nuevo hogar para la humanidad.",
+        "Imagen": "interstellar.jpg",
+        "Trailer": "https://www.youtube.com/embed/zSWdZVtXT7E"
+    },
+    {
+        "ID": 3,
+        "Título": "El Padrino",
+        "Año": 1972,
+        "Director": "Francis Ford Coppola",
+        "Sinopsis": "La historia de la familia Corleone, una de las mafias más poderosas de Nueva York, marcada por poder, lealtad y traición.",
+        "Imagen": "elpadrino.jpg",
+        "Trailer": "https://www.youtube.com/embed/UaVTIH8mujA"
+    },
+    {
+        "ID": 4,
+        "Título": "Sueños de Fuga (The Shawshank Redemption)",
+        "Año": 1994,
+        "Director": "Frank Darabont",
+        "Sinopsis": "Un hombre injustamente condenado a cadena perpetua mantiene viva la esperanza mientras construye una amistad profunda en prisión.",
+        "Imagen": "shawshank.jpg",
+        "Trailer": "https://www.youtube.com/embed/PLl99DlL6b4"
+    },
+    {
+        "ID": 5,
+        "Título": "El Club de la Pelea (Fight Club)",
+        "Año": 1999,
+        "Director": "David Fincher",
+        "Sinopsis": "Un empleado frustrado y un carismático vendedor de jabón fundan un club clandestino que se convierte en un movimiento peligroso.",
+        "Imagen": "fightclub.jpg",
+        "Trailer": "https://www.youtube.com/embed/qtRKdVHc-cE"
+    },
+    {
+        "ID": 6,
+        "Título": "La Naranja Mecánica (A Clockwork Orange)",
+        "Año": 1971,
+        "Director": "Stanley Kubrick",
+        "Sinopsis": "Un joven violento es sometido a un experimento psicológico para corregir su conducta, cuestionando la libertad humana.",
+        "Imagen": "clockwork.jpg",
+        "Trailer": "https://www.youtube.com/embed/T54uZPI4Z8A"
+    },
+    {
+        "ID": 7,
+        "Título": "Forrest Gump",
+        "Año": 1994,
+        "Director": "Robert Zemeckis",
+        "Sinopsis": "La vida de Forrest Gump, un hombre con un corazón gigante que, sin proponérselo, influye en momentos clave de la historia estadounidense.",
+        "Imagen": "forrestgump.jpg",
+        "Trailer": "https://www.youtube.com/embed/bLvqoHBptjg"
+    },
+    {
+        "ID": 8,
+        "Título": "El Señor de los Anillos: La Comunidad del Anillo",
+        "Año": 2001,
+        "Director": "Peter Jackson",
+        "Sinopsis": "Un joven hobbit recibe el encargo de destruir un anillo maligno que amenaza con hundir la Tierra Media en la oscuridad.",
+        "Imagen": "lotr1.jpg",
+        "Trailer": "https://www.youtube.com/embed/V75dMMIW2B4"
+    },
+    {
+        "ID": 9,
+        "Título": "Enemigo al Acecho",
+        "Año": 2001,
+        "Director": "Jean-Jacques Annaud",
+        "Sinopsis": "Durante la Batalla de Stalingrado, dos francotiradores, uno soviético y otro alemán, libran un duelo mortal.",
+        "Imagen": "enemigoalacecho.jpg",
+        "Trailer": "https://www.youtube.com/embed/6-8w3Ral-S8"
+    },
+    {
+        "ID": 10,
+        "Título": "Milagros Inesperados (The Green Mile)",
+        "Año": 1999,
+        "Director": "Frank Darabont",
+        "Sinopsis": "Un guardia de prisión descubre que un prisionero posee un don sobrenatural capaz de cambiar la vida de quienes lo rodean.",
+        "Imagen": "greenmile.jpg",
+        "Trailer": "https://www.youtube.com/embed/Ki4haFrqSrw"
+    },
+    {
+        "ID": 11,
+        "Título": "Kill Bill: Volumen 1",
+        "Año": 2003,
+        "Director": "Quentin Tarantino",
+        "Sinopsis": "Una asesina intenta vengarse de su antiguo equipo después de que intentaron matarla a ella y a su futuro hijo.",
+        "Imagen": "killbill1.jpg",
+        "Trailer": "https://www.youtube.com/embed/7kSuas6mRpk"
+    },
+    {
+        "ID": 12,
+        "Título": "La Lista de Schindler",
+        "Año": 1993,
+        "Director": "Steven Spielberg",
+        "Sinopsis": "La historia real de Oskar Schindler, quien salvó a más de mil judíos durante el Holocausto.",
+        "Imagen": "listaschindler.jpg",
+        "Trailer": "https://www.youtube.com/embed/gG22XNhtnoY"
+    },
+    {
+        "ID": 13,
+        "Título": "El Perfecto Asesino (Léon: The Professional)",
+        "Año": 1994,
+        "Director": "Luc Besson",
+        "Sinopsis": "Un asesino profesional cuida de una niña huérfana mientras ambos desarrollan un vínculo inesperado.",
+        "Imagen": "leon.jpg",
+        "Trailer": "https://www.youtube.com/embed/aNQqoExfQsg"
+    },
+    {
+        "ID": 14,
+        "Título": "El Ilusionista",
+        "Año": 2006,
+        "Director": "Neil Burger",
+        "Sinopsis": "Un mago misterioso usa sus habilidades para conquistar a una mujer de la nobleza y enfrentarse al príncipe heredero.",
+        "Imagen": "ilusionista.jpg",
+        "Trailer": "https://www.youtube.com/embed/i0xO64icGSY"
+    }
+]

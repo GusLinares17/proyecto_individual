@@ -1,3 +1,4 @@
+/* ==================== RESET GLOBAL ==================== */
 * {
     margin: 0;
     padding: 0;
@@ -7,18 +8,18 @@
 html, body {
     width: 100%;
     height: 100%;
-    overflow-x: hidden;   /* Evita línea blanca horizontal */
-    overflow-y: hidden;   /* Evita scroll y líneas blancas verticales */
-    background: #111;     /* Fondo cine */
+    overflow-x: hidden;      /* Evita scroll horizontal */
+    background: #111;        /* Fondo de cine */
     font-family: Arial, sans-serif;
     color: #eee;
 }
 
+/* ==================== HEADER ==================== */
 header {
     background: #000;
     padding: 10px 20px;
     display: flex;
-    justify-content: center;   /* Centrada navegación */
+    justify-content: center;
     align-items: center;
     border-bottom: 2px solid #444;
 }
@@ -32,28 +33,25 @@ nav a {
 }
 
 nav a:hover {
-    color: #ffd000; /* Amarillo Tarantino */
+    color: #ffd000;
 }
 
+/* ==================== TITULO TARANTINO (INDEX) ==================== */
 .tarantino-title {
     font-family: Georgia, "Times New Roman", serif;
-    font-size: 65px;             /* Grande y cinematográfico */
-    font-weight: 900;            /* Súper grueso */
-    text-transform: uppercase;   /* Estilo Tarantino */
-    letter-spacing: 2px;         /* Espaciado entre letras */
-    line-height: 1.05;           /* Compacto tipo póster */
+    font-size: 65px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.05;
     text-align: center;
-
-    color: #ffd000; /* Amarillo Tarantino */
+    color: #ffd000;
 
     text-shadow:
-        /* Contorno negro */
         -3px -3px 0 #000,
          3px -3px 0 #000,
         -3px  3px 0 #000,
          3px  3px 0 #000,
-
-        /* Sombra roja 3D (estilo The Hateful Eight) */
         6px 6px 0 #b30000,
         7px 7px 0 #b30000,
         8px 8px 0 #b30000,
@@ -61,12 +59,13 @@ nav a:hover {
         10px 10px 0 #b30000;
 }
 
+/* ==================== CONTENIDO CENTRAL INDEX ==================== */
 .contenedor-principal {
-    height: calc(100% - 140px); /* 100% menos header y footer */
+    height: calc(100% - 140px); 
     display: flex;
     flex-direction: column;
-    justify-content: center;   /* Centra vertical */
-    align-items: center;       /* Centra horizontal */
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding: 0 40px;
 }
@@ -77,11 +76,169 @@ nav a:hover {
     font-size: 18px;
 }
 
-footer {
+/* ==================== FOOTER FIJO SOLO EN INDEX ==================== */
+.footer-fijo {
     background: #000;
     color: #aaa;
     padding: 12px;
     text-align: center;
     border-top: 2px solid #444;
     font-size: 14px;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* ==================== FOOTER NORMAL PARA OTRAS PÁGINAS ==================== */
+.footer-normal {
+    background: #000;
+    color: #aaa;
+    padding: 12px;
+    text-align: center;
+    border-top: 2px solid #444;
+    font-size: 14px;
+
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* ============================================================= */
+/* ==================== PÁGINA PELÍCULAS ======================= */
+/* ============================================================= */
+
+.peliculas-contenedor {
+    padding: 30px;
+    overflow-y: auto;
+    min-height: calc(100% - 100px);
+}
+
+.titulo-peliculas {
+    text-align: center;
+    font-size: 35px;
+    color: #ffd000;
+    margin-bottom: 25px;
+}
+
+.grid-peliculas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    padding: 10px;
+    align-items: stretch;   /* Asegura que todas las tarjetas tengan la misma altura */
+}
+
+.card-pelicula {
+    background: #222;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    transition: transform .2s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;  /* Botón abajo */
+}
+
+.card-pelicula:hover {
+    transform: scale(1.05);
+}
+
+.card-pelicula img {
+    width: 100%;
+    border-radius: 6px;
+    height: 320px;
+    object-fit: cover;
+}
+
+.card-pelicula h3 {
+    margin: 10px 0;
+    font-size: 20px;
+}
+
+.card-pelicula button {
+    background: #ffd000;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 15px;
+    align-self: center;
+}
+
+.card-pelicula button:hover {
+    background: #e6b800;
+}
+
+/* ============================================================= */
+/* ==================== DETALLE DE PELÍCULA ==================== */
+/* ============================================================= */
+
+.detalle-contenedor {
+    padding: 30px;
+    overflow-y: auto;
+    min-height: calc(100% - 100px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;        /* CENTRA TODO */
+    text-align: center;
+}
+
+.detalle-titulo {
+    color: #ffd000;
+    margin-bottom: 20px;
+    font-size: 32px;
+    text-align: center;
+}
+
+/* Imagen centrada */
+.detalle-imagen {
+    width: 350px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* Datos (año y director) */
+.detalle-datos {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+/* Caja de sinopsis con borde amarillo */
+.detalle-sinopsis-cuadro {
+    background: #1a1a1a;
+    border: 2px solid #ffd000;
+    padding: 20px;
+    width: 70%;
+    border-radius: 12px;        /* Esquinas redondeadas */
+    margin-top: 20px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* Trailer centrado */
+.detalle-trailer {
+    margin-top: 25px;
+    margin-bottom: 40px;        /* Para que NO choque con el botón */
+}
+
+/* Botón volver */
+.btn-volver {
+    background: #ffd000;
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+
+.btn-volver:hover {
+    background: #e6b800;
 }
