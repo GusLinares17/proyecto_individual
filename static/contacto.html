@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
@@ -22,21 +21,18 @@
 
     <h1 class="titulo-tarantino">Escríbeme</h1>
 
+    <form id="formContacto" method="POST" action="/contacto">
 
-    <form id="formContacto" method="POST" action="http://localhost:8000/enviar">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
 
-        <label>Nombre:</label>
-        <input type="text" name="nombre" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-        <label>Correo electrónico:</label>
-        <input type="email" name="email" required>
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
 
-        <label>Mensaje:</label>
-        <textarea name="mensaje" rows="5" required></textarea>
-
-        <button type="submit" class="btn-enviar">Enviar mensaje</button>
-
-        <p id="respuesta" class="respuesta"></p>
+        <button type="submit" class="btn-enviar">Enviar</button>
 
     </form>
 
