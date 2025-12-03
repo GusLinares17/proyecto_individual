@@ -1,11 +1,14 @@
+// Obtener el ID desde la URL
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
-fetch("../../peliculas.json")
-    .then(response => response.json())
+// Cargar JSON
+fetch("/peliculas.json")
+    .then(res => res.json())
     .then(data => mostrarDetalle(data));
 
 function mostrarDetalle(lista) {
+
     const pelicula = lista.find(p => p.ID == id);
 
     if (!pelicula) {
@@ -13,13 +16,16 @@ function mostrarDetalle(lista) {
         return;
     }
 
+    // Llenar la información
     document.getElementById("titulo").textContent = pelicula.Título;
     document.getElementById("anio").textContent = pelicula.Año;
     document.getElementById("director").textContent = pelicula.Director;
     document.getElementById("sinopsis").textContent = pelicula.Sinopsis;
 
-    document.getElementById("imagen").src = "../img/" + pelicula.Imagen;
+    // Imagen
+    document.getElementById("imagen").src = "/static/img/" + pelicula.Imagen;
     document.getElementById("imagen").alt = pelicula.Título;
 
+    // Trailer
     document.getElementById("trailer").src = pelicula.Trailer;
 }

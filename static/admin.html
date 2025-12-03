@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -17,24 +17,13 @@
     </nav>
 </header>
 
-<main class="contenedor-principal">
-    <h1 class="titulo-tarantino">Panel Admin</h1>
+<main class="admin-contenedor">
+    <h1 class="titulo-tarantino">Panel de Administración</h1>
 
-    <div style="background:#222; padding:20px; border-radius:10px; width:350px; text-align:center;">
-        <p>Ingrese la contraseña para ver los mensajes:</p>
+    <p>Esta sección está restringida y es solo para el administrador.</p>
 
-        <input type="password" id="pwd" placeholder="Contraseña" style="padding:8px; width:90%;">
-        <br><br>
-        <button onclick="entrar()" class="btn-enviar">Entrar</button>
-    </div>
+    <p style="opacity:0.7;">(Acceso privado)</p>
 </main>
-
-<script>
-function entrar() {
-    let clave = document.getElementById("pwd").value;
-    window.location.href = "/admin?password=" + clave;
-}
-</script>
 
 <footer class="footer-normal">
     © 2025 Gustavo Linares – Proyecto Individual
