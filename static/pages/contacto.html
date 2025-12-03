@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="peliculas.html">Películas</a>
+        <a href="curiosidades.html">Curiosidades</a>
+        <a href="contacto.html">Contacto</a>
+    </nav>
+</header>
+
+<main class="contacto-contenedor">
+
+    <h1 class="titulo-tarantino">Escríbeme</h1>
+
+
+    <form id="formContacto" method="POST" action="http://localhost:8000/enviar">
+
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required>
+
+        <label>Correo electrónico:</label>
+        <input type="email" name="email" required>
+
+        <label>Mensaje:</label>
+        <textarea name="mensaje" rows="5" required></textarea>
+
+        <button type="submit" class="btn-enviar">Enviar mensaje</button>
+
+        <p id="respuesta" class="respuesta"></p>
+
+    </form>
+
+</main>
+
+<footer class="footer-normal">
+    © 2025 Gustavo Linares – Proyecto Individual
+</footer>
+
+</body>
+</html>

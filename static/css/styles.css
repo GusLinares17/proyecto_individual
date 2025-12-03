@@ -8,8 +8,8 @@
 html, body {
     width: 100%;
     height: 100%;
-    overflow-x: hidden;      /* Evita scroll horizontal */
-    background: #111;        /* Fondo de cine */
+    overflow-x: hidden;
+    background: #111;
     font-family: Arial, sans-serif;
     color: #eee;
 }
@@ -36,7 +36,53 @@ nav a:hover {
     color: #ffd000;
 }
 
-/* ==================== TITULO TARANTINO (INDEX) ==================== */
+/* ============================================================= */
+/* ==================== ESTILO TARANTINO ======================= */
+/* ============================================================= */
+
+.titulo-tarantino {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 55px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+    line-height: 1.05;
+    color: #ffd000;
+
+    text-shadow:
+        -3px -3px 0 #000,
+         3px -3px 0 #000,
+        -3px  3px 0 #000,
+         3px  3px 0 #000,
+        6px 6px 0 #b30000,
+        7px 7px 0 #b30000,
+        8px 8px 0 #b30000;
+}
+
+/* Estilo Tarantino especial para títulos de películas */
+.titulo-tarantino-detalle {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 75px; /* GRANDE estilo póster */
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    line-height: 1.05;
+    margin-bottom: 25px;
+    color: #ffd000;
+
+    text-shadow:
+        -4px -4px 0 #000,
+         4px -4px 0 #000,
+        -4px  4px 0 #000,
+         4px  4px 0 #000,
+        7px 7px 0 #b30000,
+        8px 8px 0 #b30000,
+        9px 9px 0 #b30000;
+}
+
+/* ==================== TITULO INDEX ==================== */
 .tarantino-title {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 65px;
@@ -54,14 +100,12 @@ nav a:hover {
          3px  3px 0 #000,
         6px 6px 0 #b30000,
         7px 7px 0 #b30000,
-        8px 8px 0 #b30000,
-        9px 9px 0 #b30000,
-        10px 10px 0 #b30000;
+        8px 8px 0 #b30000;
 }
 
-/* ==================== CONTENIDO CENTRAL INDEX ==================== */
+/* ==================== CONTENIDO INDEX ==================== */
 .contenedor-principal {
-    height: calc(100% - 140px); 
+    height: calc(100% - 140px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -76,7 +120,8 @@ nav a:hover {
     font-size: 18px;
 }
 
-/* ==================== FOOTER FIJO SOLO EN INDEX ==================== */
+/* ==================== FOOTERS ==================== */
+
 .footer-fijo {
     background: #000;
     color: #aaa;
@@ -84,14 +129,11 @@ nav a:hover {
     text-align: center;
     border-top: 2px solid #444;
     font-size: 14px;
-
     position: fixed;
     bottom: 0;
-    left: 0;
     width: 100%;
 }
 
-/* ==================== FOOTER NORMAL PARA OTRAS PÁGINAS ==================== */
 .footer-normal {
     background: #000;
     color: #aaa;
@@ -99,8 +141,6 @@ nav a:hover {
     text-align: center;
     border-top: 2px solid #444;
     font-size: 14px;
-
-    position: relative;
     width: 100%;
     margin-top: 20px;
 }
@@ -115,19 +155,12 @@ nav a:hover {
     min-height: calc(100% - 100px);
 }
 
-.titulo-peliculas {
-    text-align: center;
-    font-size: 35px;
-    color: #ffd000;
-    margin-bottom: 25px;
-}
-
 .grid-peliculas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 20px;
     padding: 10px;
-    align-items: stretch;   /* Asegura que todas las tarjetas tengan la misma altura */
+    align-items: stretch;
 }
 
 .card-pelicula {
@@ -139,7 +172,7 @@ nav a:hover {
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;  /* Botón abajo */
+    justify-content: space-between;
 }
 
 .card-pelicula:hover {
@@ -156,6 +189,7 @@ nav a:hover {
 .card-pelicula h3 {
     margin: 10px 0;
     font-size: 20px;
+    color: #fff;
 }
 
 .card-pelicula button {
@@ -181,54 +215,39 @@ nav a:hover {
     padding: 30px;
     overflow-y: auto;
     min-height: calc(100% - 100px);
-
     display: flex;
     flex-direction: column;
-    align-items: center;        /* CENTRA TODO */
+    align-items: center;
     text-align: center;
 }
 
-.detalle-titulo {
-    color: #ffd000;
-    margin-bottom: 20px;
-    font-size: 32px;
-    text-align: center;
-}
-
-/* Imagen centrada */
 .detalle-imagen {
     width: 350px;
     border-radius: 12px;
     margin-bottom: 20px;
-    display: block;
 }
 
-/* Datos (año y director) */
 .detalle-datos {
     font-size: 18px;
     margin-bottom: 20px;
-    line-height: 1.4;
 }
 
-/* Caja de sinopsis con borde amarillo */
 .detalle-sinopsis-cuadro {
     background: #1a1a1a;
     border: 2px solid #ffd000;
     padding: 20px;
     width: 70%;
-    border-radius: 12px;        /* Esquinas redondeadas */
+    border-radius: 12px;
     margin-top: 20px;
     margin-bottom: 30px;
     line-height: 1.6;
 }
 
-/* Trailer centrado */
 .detalle-trailer {
     margin-top: 25px;
-    margin-bottom: 40px;        /* Para que NO choque con el botón */
+    margin-bottom: 40px;
 }
 
-/* Botón volver */
 .btn-volver {
     background: #ffd000;
     padding: 12px 25px;
@@ -236,9 +255,131 @@ nav a:hover {
     cursor: pointer;
     font-weight: bold;
     border-radius: 6px;
-    margin-top: 20px;
 }
 
 .btn-volver:hover {
     background: #e6b800;
+}
+
+/* ============================================================= */
+/* ==================== CURIOSIDADES =========================== */
+/* ============================================================= */
+
+.curiosidades-contenedor {
+    padding: 30px;
+    overflow-y: auto;
+    min-height: calc(100% - 100px);
+}
+
+.curiosidad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.curiosidad img {
+    width: 330px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #ffd000;
+}
+
+.texto-curiosidad {
+    max-width: 600px;
+    background: #1a1a1a;
+    border: 2px solid #ffd000;
+    padding: 25px;
+    border-radius: 12px;
+    transform: skewX(-6deg);
+}
+
+.texto-curiosidad p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #f5f5f5;
+    font-style: italic;
+    transform: skewX(6deg);
+}
+
+.fila-izq img { order: 1; }
+.fila-izq .texto-curiosidad { order: 2; }
+
+.fila-der img { order: 2; }
+.fila-der .texto-curiosidad { order: 1; }
+
+@media (max-width: 800px) {
+    .curiosidad { flex-direction: column; }
+    .texto-curiosidad { transform: skewX(0deg); }
+    .texto-curiosidad p { transform: skewX(0deg); }
+}
+
+/* ============================================================= */
+/* ==================== CONTACTO =============================== */
+/* ============================================================= */
+
+.contacto-contenedor {
+    padding: 30px;
+    overflow-y: auto;
+    min-height: calc(100% - 100px);
+}
+
+#formContacto {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #1a1a1a;
+    border: 2px solid #ffd000;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+#formContacto label {
+    display: block;
+    color: #ffd000;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+#formContacto input,
+#formContacto textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: #000;
+    color: #fff;
+}
+
+.btn-enviar {
+    margin-top: 20px;
+    background: #ffd000;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.btn-enviar:hover {
+    background: #e6b800;
+}
+
+.respuesta {
+    margin-top: 15px;
+    text-align: center;
+    color: #00ff88;
+    font-weight: bold;
+}
+
+/* ESPACIADO CORRECTO BAJO TÍTULOS TARANTINO */
+.titulo-tarantino {
+    margin-bottom: 40px; /* Ajusta si quieres más o menos */
+}
+
+.titulo-tarantino-detalle {
+    margin-bottom: 50px; /* Más grande para el título estilo póster */
 }
