@@ -1,66 +1,77 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import os
+import mimetypes
 import urllib.parse
-import pymysql   # <-- para MySQL
+import pymysql
 
-PUERTO = 8000
+HOST = "localhost"
+PORT = 8000
 
-# =======================================
-#  FUNCIÓN DE CONEXIÓN (simple)
-# =======================================
+BASE_DIR = os.getcwd()
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+
 def conectar_db():
     return pymysql.connect(
         host="localhost",
         user="root",
-        password="root1234",  # tu clave
+        password="root1234",
         database="proyecto_cine",
         port=3306
     )
 
-
 class MiServidor(BaseHTTPRequestHandler):
 
-    # =======================================
-    #                  GET
-    # =======================================
     def do_GET(self):
-
         ruta = self.path.split("?")[0]
 
         if ruta == "/":
-            self.send_response(302)
-            self.send_header("Location", "/static/index.html")
-            self.end_headers()
+            self.servir_archivo(os.path.join(STATIC_DIR, "index.html"))
             return
 
-        # ------------------------------
-        #      ADMIN PROTEGIDO
-        # ------------------------------
         if ruta == "/admin":
             self.mostrar_admin()
             return
 
         if ruta == "/peliculas.json":
-            with open("peliculas.json", "rb") as f:
-                self.send_response(200)
-                self.send_header("Content-Type", "application/json")
-                self.end_headers()
-                self.wfile.write(f.read())
+            self.servir_archivo(os.path.join(BASE_DIR, "peliculas.json"))
             return
 
         if ruta.startswith("/static/"):
-            archivo = "." + ruta
-            with open(archivo, "rb") as f:
-                self.send_response(200)
-                self.end_headers()
-                self.wfile.write(f.read())
+            archivo = ruta.replace("/static/", "")
+            self.servir_archivo(os.path.join(STATIC_DIR, archivo))
             return
 
-    # =======================================
-    #       FUNCIÓN PARA /admin
-    # =======================================
-    def mostrar_admin(self):
+        self.enviar_404()
 
-        # Obtener contraseña ?pass=1234
+    def do_POST(self):
+        if self.path == "/contacto":
+            self.procesar_contacto()
+            return
+
+        self.enviar_404()
+
+    def servir_archivo(self, ruta):
+        if os.path.exists(ruta) and os.path.isfile(ruta):
+            tipo_mime = mimetypes.guess_type(ruta)[0]
+            if tipo_mime is None:
+                tipo_mime = "text/plain"
+
+            self.send_response(200)
+            self.send_header("Content-Type", tipo_mime)
+            self.end_headers()
+
+            with open(ruta, "rb") as f:
+                self.wfile.write(f.read())
+        else:
+            self.enviar_404()
+
+    def enviar_404(self):
+        self.send_response(404)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(b"<h1>404 - Archivo no encontrado</h1>")
+
+    def mostrar_admin(self):
         query = urllib.parse.urlparse(self.path).query
         params = urllib.parse.parse_qs(query)
         clave = params.get("pass", [""])[0]
@@ -71,25 +82,32 @@ class MiServidor(BaseHTTPRequestHandler):
             self.wfile.write(b"<h1>Acceso denegado</h1>")
             return
 
-        # Leer mensajes desde MySQL
         conexion = conectar_db()
         cursor = conexion.cursor()
-        cursor.execute("SELECT nombre, email, mensaje, fecha FROM mensajes ORDER BY id DESC")
-        filas = cursor.fetchall()
+        cursor.execute(
+            "SELECT nombre, email, mensaje, fecha FROM mensajes ORDER BY id DESC"
+        )
+        mensajes = cursor.fetchall()
         cursor.close()
         conexion.close()
 
-        # Crear HTML simple
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.end_headers()
+
         html = """
         <html>
-        <head><meta charset='UTF-8'><title>Admin</title></head>
-        <body style='background:black;color:white;font-family:Arial;padding:20px;'>
+        <head>
+            <meta charset="UTF-8">
+            <title>Admin</title>
+        </head>
+        <body style="background:black;color:white;font-family:Arial;padding:20px;">
         <h1>Mensajes recibidos</h1>
         """
 
-        for nombre, email, mensaje, fecha in filas:
+        for nombre, email, mensaje, fecha in mensajes:
             html += f"""
-            <div style='border:1px solid #444;padding:10px;margin:10px;'>
+            <div style="border:1px solid #444;padding:10px;margin:10px;">
                 <p><b>Nombre:</b> {nombre}</p>
                 <p><b>Email:</b> {email}</p>
                 <p><b>Mensaje:</b> {mensaje}</p>
@@ -99,54 +117,33 @@ class MiServidor(BaseHTTPRequestHandler):
 
         html += "</body></html>"
 
-        self.send_response(200)
-        self.send_header("Content-Type", "text/html")
-        self.end_headers()
         self.wfile.write(html.encode("utf-8"))
 
+    def procesar_contacto(self):
+        longitud = int(self.headers["Content-Length"])
+        cuerpo = self.rfile.read(longitud).decode("utf-8")
+        datos = urllib.parse.parse_qs(cuerpo)
 
-    # =======================================
-    #                 POST
-    # =======================================
-    def do_POST(self):
+        nombre = datos.get("nombre", [""])[0]
+        email = datos.get("email", [""])[0]
+        mensaje = datos.get("mensaje", [""])[0]
 
-        if self.path == "/contacto":
+        conexion = conectar_db()
+        cursor = conexion.cursor()
+        cursor.execute(
+            "INSERT INTO mensajes (nombre, email, mensaje) VALUES (%s, %s, %s)",
+            (nombre, email, mensaje)
+        )
+        conexion.commit()
+        cursor.close()
+        conexion.close()
 
-            longitud = int(self.headers["Content-Length"])
-            cuerpo = self.rfile.read(longitud).decode("utf-8")
-            datos = urllib.parse.parse_qs(cuerpo)
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(b"<h1>Mensaje recibido correctamente</h1>")
 
-            nombre = datos.get("nombre", [""])[0]
-            email  = datos.get("email", [""])[0]
-            mensaje = datos.get("mensaje", [""])[0]
-
-            print("===== FORMULARIO =====")
-            print("Nombre:", nombre)
-            print("Email:", email)
-            print("Mensaje:", mensaje)
-
-            # Guardar en MySQL
-            conexion = conectar_db()
-            cursor = conexion.cursor()
-            cursor.execute(
-                "INSERT INTO mensajes (nombre, email, mensaje) VALUES (%s, %s, %s)",
-                (nombre, email, mensaje)
-            )
-            conexion.commit()
-            cursor.close()
-            conexion.close()
-
-            # Respuesta simple
-            self.send_response(200)
-            self.send_header("Content-Type", "text/html")
-            self.end_headers()
-            self.wfile.write(b"<h1>Mensaje recibido correctamente!</h1>")
-            return
-
-
-# =======================================
-#        INICIAR SERVIDOR
-# =======================================
-with HTTPServer(("", PUERTO), MiServidor) as servidor:
-    print("Servidor activo en puerto", PUERTO)
+if __name__ == "__main__":
+    servidor = HTTPServer((HOST, PORT), MiServidor)
+    print(f"Servidor iniciado en http://{HOST}:{PORT}")
     servidor.serve_forever()
