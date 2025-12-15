@@ -28,17 +28,17 @@ class MiServidor(BaseHTTPRequestHandler):
             self.servir_archivo(os.path.join(STATIC_DIR, "index.html"))
             return
 
-        if ruta == "/admin":
-            self.mostrar_admin()
-            return
-
         if ruta == "/peliculas.json":
             self.servir_archivo(os.path.join(BASE_DIR, "peliculas.json"))
             return
 
-        if ruta.startswith("/static/"):
-            archivo = ruta.replace("/static/", "")
-            self.servir_archivo(os.path.join(STATIC_DIR, archivo))
+        if ruta == "/admin":
+            self.mostrar_admin()
+            return
+
+        archivo = os.path.join(STATIC_DIR, ruta.lstrip("/"))
+        if os.path.exists(archivo) and os.path.isfile(archivo):
+            self.servir_archivo(archivo)
             return
 
         self.enviar_404()
@@ -47,23 +47,19 @@ class MiServidor(BaseHTTPRequestHandler):
         if self.path == "/contacto":
             self.procesar_contacto()
             return
-
         self.enviar_404()
 
     def servir_archivo(self, ruta):
-        if os.path.exists(ruta) and os.path.isfile(ruta):
-            tipo_mime = mimetypes.guess_type(ruta)[0]
-            if tipo_mime is None:
-                tipo_mime = "text/plain"
+        tipo_mime = mimetypes.guess_type(ruta)[0]
+        if tipo_mime is None:
+            tipo_mime = "text/plain"
 
-            self.send_response(200)
-            self.send_header("Content-Type", tipo_mime)
-            self.end_headers()
+        self.send_response(200)
+        self.send_header("Content-Type", tipo_mime)
+        self.end_headers()
 
-            with open(ruta, "rb") as f:
-                self.wfile.write(f.read())
-        else:
-            self.enviar_404()
+        with open(ruta, "rb") as f:
+            self.wfile.write(f.read())
 
     def enviar_404(self):
         self.send_response(404)
@@ -95,27 +91,9 @@ class MiServidor(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "text/html; charset=utf-8")
         self.end_headers()
 
-        html = """
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>Admin</title>
-        </head>
-        <body style="background:black;color:white;font-family:Arial;padding:20px;">
-        <h1>Mensajes recibidos</h1>
-        """
-
+        html = "<h1>Mensajes recibidos</h1>"
         for nombre, email, mensaje, fecha in mensajes:
-            html += f"""
-            <div style="border:1px solid #444;padding:10px;margin:10px;">
-                <p><b>Nombre:</b> {nombre}</p>
-                <p><b>Email:</b> {email}</p>
-                <p><b>Mensaje:</b> {mensaje}</p>
-                <p><b>Fecha:</b> {fecha}</p>
-            </div>
-            """
-
-        html += "</body></html>"
+            html += f"<p>{nombre} - {email} - {mensaje} - {fecha}</p>"
 
         self.wfile.write(html.encode("utf-8"))
 
